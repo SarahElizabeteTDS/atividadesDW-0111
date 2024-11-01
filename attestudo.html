@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavasScripts</title>
+</head>
+<body>
+    <script>
+
+        let turma = 
+        {
+            curso: "TDS",
+            ano: 2,
+            estudantes: ["Ana","Bia","Carla"]
+        }
+
+        let turmaString = JSON.stringify(turma);
+
+        //console.log(turmaString);
+
+        localStorage.setItem('chave', 'valor');
+
+        localStorage.setItem('outra chave','outro valor');
+
+        localStorage.setItem('turma', JSON.stringify(turma));
+
+        let turma2 = localStorage.getItem('turma');
+
+        turma2 = JSON.parse(turma2);
+
+        console.log(turma2.ano);
+
+        //localStorage.clear();
+
+    </script>
+</body>
+</html>
