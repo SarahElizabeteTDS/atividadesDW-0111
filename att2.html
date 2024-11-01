@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+        .content
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .content button
+        {
+            background-color: aliceblue;
+            border-radius: 5px;
+        }   
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Faça suas anotações aqui:</h1>
+        <input type="text">
+        <button>Salvar</button>
+
+        <p>LISTA</p>
+        <ul></ul>
+    </div>
+
+    <script>
+        let input = document.querySelector("input");
+        let button = document.querySelector("button");
+        let lista = document.querySelector("ul");
+        
+        button.addEventListener("click", ()=>
+        {
+            let tarefa = input.value;
+            if (tarefa) 
+            {
+                addToList(tarefa);
+                salvarLocal(tarefa);
+            } 
+            input.value = "";
+        });
+
+        function addToList(tarefa)
+        {
+            let novaAtt = document.createElement('li');
+            novaAtt.textContent = tarefa;
+
+            let excluir = document.createElement('button');
+            excluir.textContent = 'excluir';
+            excluir.addEventListener('click', ()=>
+            {
+                novaAtt.remove();
+            });
+            novaAtt.appendChild(excluir);
+
+            lista.appendChild(novaAtt);
+        }
+
+        function salvarLocal(tarefa)
+        {
+            const tarefas = obterTodasTarefas();
+
+            tarefas.push(tarefa); 
+
+            localStorage.setItem('tarefas', JSON.stringify(tarefa));
+        }
+
+        function obterTodasTarefas()
+        {
+            let tarefas = localStorage.getItem('tarefas');
+            return tarefas ? JSON.parse(tarefas) : [];
+        }
+        
+    </script>
+</body>
+</html>
